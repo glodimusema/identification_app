@@ -153,6 +153,32 @@ namespace identification_app.Classes
             return dst;
         }
 
+
+        public DataSet get_Report_TrierField(string nomTable, string nomchamp, DateTime val1, DateTime val2,string nomchamp2,string valeur)
+        {
+            DataSet dst;
+            try
+            {
+                InnitialiseConnexion();
+                if (!con.State.ToString().ToLower().Equals("open")) con.Open();
+                cmd = new SqlCommand("SELECT * FROM " + nomTable + " WHERE (" + nomchamp + " between @date1 and @date2) and ("+nomchamp2+" = @valeurs) ", con);
+                setParameter(cmd, "@date1", DbType.DateTime, 30, val1);
+                setParameter(cmd, "@date2", DbType.DateTime, 30, val2);
+                setParameter(cmd, "@valeurs", DbType.String, 30, valeur);
+                dt = new SqlDataAdapter(cmd);
+                dst = new DataSet();
+                dt.Fill(dst, nomTable);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dt.Dispose(); con.Close();
+            }
+            return dst;
+        }
         public DataSet get_Report_One(string nomTable, string nomchamp, string val1)
         {
             DataSet dst;
@@ -212,6 +238,18 @@ namespace identification_app.Classes
             if (!con.State.ToString().ToLower().Equals("open")) con.Open();
             DataTable table = new DataTable();
             dt = new SqlDataAdapter("select * from " + nomTable + "", con);
+            dt.Fill(table);
+            con.Close();
+
+            return table;
+        }
+
+        public DataTable searchData(string nomTable,string nomChmap,string datas)
+        {
+            InnitialiseConnexion();
+            if (!con.State.ToString().ToLower().Equals("open")) con.Open();
+            DataTable table = new DataTable();
+            dt = new SqlDataAdapter("select * from " + nomTable + " where "+nomChmap+" like '%"+datas+"%'", con);
             dt.Fill(table);
             con.Close();
 

@@ -49,7 +49,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.liste_personne = new System.Windows.Forms.DataGridView();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtRecherche = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateNaissance.Properties.CalendarTimeProperties)).BeginInit();
@@ -223,7 +223,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(63, 396);
+            this.button1.Location = new System.Drawing.Point(819, 78);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(199, 48);
             this.button1.TabIndex = 18;
@@ -234,9 +234,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(268, 396);
+            this.button2.Location = new System.Drawing.Point(819, 140);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(191, 48);
+            this.button2.Size = new System.Drawing.Size(199, 48);
             this.button2.TabIndex = 19;
             this.button2.Text = "Enregistrer";
             this.button2.UseVisualStyleBackColor = true;
@@ -245,9 +245,9 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(465, 396);
+            this.button3.Location = new System.Drawing.Point(819, 203);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(213, 48);
+            this.button3.Size = new System.Drawing.Size(199, 48);
             this.button3.TabIndex = 20;
             this.button3.Text = "Modifier";
             this.button3.UseVisualStyleBackColor = true;
@@ -256,9 +256,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(684, 396);
+            this.button4.Location = new System.Drawing.Point(819, 264);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(201, 48);
+            this.button4.Size = new System.Drawing.Size(199, 48);
             this.button4.TabIndex = 21;
             this.button4.Text = "Supprimer";
             this.button4.UseVisualStyleBackColor = true;
@@ -267,25 +267,26 @@
             // liste_personne
             // 
             this.liste_personne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.liste_personne.Location = new System.Drawing.Point(17, 517);
+            this.liste_personne.Location = new System.Drawing.Point(17, 452);
             this.liste_personne.Name = "liste_personne";
             this.liste_personne.RowTemplate.Height = 28;
-            this.liste_personne.Size = new System.Drawing.Size(1031, 273);
+            this.liste_personne.Size = new System.Drawing.Size(1031, 338);
             this.liste_personne.TabIndex = 22;
             // 
-            // textBox6
+            // txtRecherche
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(135, 471);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(553, 30);
-            this.textBox6.TabIndex = 24;
+            this.txtRecherche.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRecherche.Location = new System.Drawing.Point(134, 416);
+            this.txtRecherche.Name = "txtRecherche";
+            this.txtRecherche.Size = new System.Drawing.Size(553, 30);
+            this.txtRecherche.TabIndex = 24;
+            this.txtRecherche.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(12, 474);
+            this.label9.Location = new System.Drawing.Point(11, 419);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(117, 25);
             this.label9.TabIndex = 23;
@@ -307,7 +308,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1055, 802);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txtRecherche);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.liste_personne);
             this.Controls.Add(this.button4);
@@ -364,7 +365,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView liste_personne;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtRecherche;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
     }

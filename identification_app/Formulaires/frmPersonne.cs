@@ -20,9 +20,9 @@ namespace identification_app.Formulaires
 
         clsPersonne cb = null;
 
-        private void button1_Click(object sender, EventArgs e)
+        void Actualiser()
         {
-            txtId.Text="";
+            txtId.Text = "";
             txtNom.Text = "";
             txtAdresse.Text = "";
             txtContact.Text = "";
@@ -32,7 +32,7 @@ namespace identification_app.Formulaires
             txtDomaineEtude.Text = "";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void SaveData()
         {
             try
             {
@@ -54,7 +54,8 @@ namespace identification_app.Formulaires
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+        void UpdateData()
         {
             try
             {
@@ -77,15 +78,41 @@ namespace identification_app.Formulaires
             }
         }
 
+
+        void DeleteData()
+        {
+            clsGlossaires.Getinstance().SupprimerData("tpersonne", "id", txtId.Text);
+            liste_personne.DataSource = clsGlossaires.Getinstance().loadData("tpersonne");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Actualiser();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveData();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UpdateData();
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            clsGlossaires.Getinstance().SupprimerData("tpersonne", "id",txtId.Text);
-            liste_personne.DataSource = clsGlossaires.Getinstance().loadData("tpersonne");
+            DeleteData();
         }
 
         private void frmPersonne_Load(object sender, EventArgs e)
         {
             liste_personne.DataSource = clsGlossaires.Getinstance().loadData("tpersonne");
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            liste_personne.DataSource = clsGlossaires.Getinstance().searchData("tpersonne","noms",txtRecherche.Text);
         }
     }
 }
