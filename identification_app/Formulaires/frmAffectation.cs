@@ -105,5 +105,18 @@ namespace identification_app.Formulaires
         {
             liste_affectation.DataSource = clsGlossaires.Getinstance().searchData("vAffectation", "noms", txtRecherche.Text);
         }
+
+        private void liste_affectation_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = liste_affectation.Rows[e.RowIndex];
+                // Supposons que tu as trois TextBox : txtId, txtUsername, txtNiveau
+                txtId.Text = row.Cells["id"].Value.ToString();
+                txtEnqueteur.SelectedItem = row.Cells["noms"].Value.ToString();
+                txtProjet.SelectedItem = row.Cells["nom_projet"].Value.ToString();
+                txtAutresDetails.Text = row.Cells["autres_details"].Value.ToString();
+            }
+        }
     }
 }

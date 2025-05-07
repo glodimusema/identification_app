@@ -8,6 +8,7 @@ namespace identification_app.Classes
 {
     class clsConnexion
     {
-        public static string chemin = "server=localhost;database=vente_db;uid=sa;pwd=bbbbbb;";
+        //public static string chemin = "server=localhost;database=data_db;uid=sa;pwd=bbbbbb;";
+        public static string chemin = "server=localhost;database=data_db;Integrated Security = true;";
     }
 }

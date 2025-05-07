@@ -69,7 +69,7 @@ namespace identification_app.Classes
 
                 foreach (DataRow dr in dt1.Rows)
                 {
-                    comb1.Items.Add(dr["nomEcol"]);
+                    comb1.Items.Add(dr[nomchamp]);
                 }
 
             }
@@ -244,6 +244,61 @@ namespace identification_app.Classes
             return table;
         }
 
+
+        public bool Login_bool(string username, string password)
+        {
+            using (SqlConnection con = new SqlConnection(clsConnexion.chemin))
+            {
+                string query = "SELECT COUNT(*) FROM tuser WHERE username = @username AND passwords = @password";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    con.Open();
+                    int count = (int)cmd.ExecuteScalar();
+
+                    return count > 0;
+                }
+            }
+        }
+
+
+        public clsUser Login(string username, string password)
+        {
+            string connectionString = clsConnexion.chemin;
+            clsUser utilisateur = null;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT id, username, niveau FROM tuser WHERE username = @username AND passwords = @password";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        utilisateur = new clsUser
+                        {
+                            Id = reader.GetInt32(0),
+                            Username = reader.GetString(1),
+                            Niveau = reader.GetString(2)
+                        };
+                    }
+                }
+            }
+
+            return utilisateur;
+        }
+
+
+
         public DataTable searchData(string nomTable,string nomChmap,string datas)
         {
             InnitialiseConnexion();
@@ -271,7 +326,8 @@ namespace identification_app.Classes
         {
             InnitialiseConnexion();
             con.Open();
-            cmd = new SqlCommand("insert into tpersonne (noms,adresse,contact,etat_civil,date_naissance,niveau_etude,domaine_etude,author) values (@noms,@adresse,@contact,@etat_civil,@date_naissance,@niveau_etude,@domaine_etude,@author)", con);
+            cmd = new SqlCommand("insert into tpersonne (noms,adresse,contact,etat_civil,date_naissance,niveau_etude,domaine_etude,author) values " +
+                "(@noms,@adresse,@contact,@etat_civil,@date_naissance,@niveau_etude,@domaine_etude,@author)", con);
             cmd.Parameters.AddWithValue("@noms", cl.Noms);
             cmd.Parameters.AddWithValue("@adresse", cl.Adresse);
             cmd.Parameters.AddWithValue("@contact", cl.Contact);
@@ -279,7 +335,7 @@ namespace identification_app.Classes
             cmd.Parameters.AddWithValue("@date_naissance", cl.Date_naissance);
             cmd.Parameters.AddWithValue("@niveau_etude", cl.Niveau_etude);
             cmd.Parameters.AddWithValue("@domaine_etude", cl.Domaine_etude);
-            cmd.Parameters.AddWithValue("@author", cl.Author);
+            cmd.Parameters.AddWithValue("@author", "Admin");
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -288,7 +344,7 @@ namespace identification_app.Classes
         {
             InnitialiseConnexion();
             con.Open();
-            cmd = new SqlCommand("update tpersonne set noms=@noms,adresse=@adresse,contact=@contact,etat_civil=@etat_civil,date_naissance=@date_naissance,niveau_etude=@niveau_etude,domaine_etude=@domaine_etude,author=@author where id=@id", con);
+            cmd = new SqlCommand("update tpersonne set noms=@noms,adresse=@adresse,contact=@contact,etat_civil=@etat_civil,date_naissance=@date_naissance,niveau_etude=@niveau_etude,domaine_etude=@domaine_etude where id=@id", con);
             cmd.Parameters.AddWithValue("@id", cl.Id);
             cmd.Parameters.AddWithValue("@noms", cl.Noms);
             cmd.Parameters.AddWithValue("@adresse", cl.Adresse);
@@ -297,7 +353,6 @@ namespace identification_app.Classes
             cmd.Parameters.AddWithValue("@date_naissance", cl.Date_naissance);
             cmd.Parameters.AddWithValue("@niveau_etude", cl.Niveau_etude);
             cmd.Parameters.AddWithValue("@domaine_etude", cl.Domaine_etude);
-            cmd.Parameters.AddWithValue("@author", cl.Author);
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -335,10 +390,12 @@ namespace identification_app.Classes
         {
             InnitialiseConnexion();
             con.Open();
-            cmd = new SqlCommand("insert into taffectation_projet (refPersonne,refProjet,author) values (@refPersonne,@refProjet,@author)", con);
+            cmd = new SqlCommand("insert into taffectation_projet (refPersonne,refProjet,date_affectation,autres_details,author) values (@refPersonne,@refProjet,@date_affectation,@autres_details,@author)", con);
             cmd.Parameters.AddWithValue("@refPersonne", cat.RefPersonne);
             cmd.Parameters.AddWithValue("@refProjet", cat.RefProjet);
-            cmd.Parameters.AddWithValue("@author", cat.Author);
+            cmd.Parameters.AddWithValue("@date_affectation", cat.RefProjet);
+            cmd.Parameters.AddWithValue("@autres_details", cat.RefProjet);
+            cmd.Parameters.AddWithValue("@author", "Admin");
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -347,11 +404,13 @@ namespace identification_app.Classes
         {
             InnitialiseConnexion();
             con.Open();
-            cmd = new SqlCommand("update taffectation_projet set refPersonne=@refPersonne,refProjet=@refProjet,author=@author where id=@id", con);
+            cmd = new SqlCommand("update taffectation_projet set refPersonne=@refPersonne,refProjet=@refProjet,date_affectation=@date_affectation,autres_details=@autres_details where id=@id", con);
             cmd.Parameters.AddWithValue("@id", cat.Id);
             cmd.Parameters.AddWithValue("@refPersonne", cat.RefPersonne);
             cmd.Parameters.AddWithValue("@refProjet", cat.RefProjet);
-            cmd.Parameters.AddWithValue("@author", cat.Author);
+            cmd.Parameters.AddWithValue("@date_affectation", cat.Date_affectation);
+            cmd.Parameters.AddWithValue("@autres_details", cat.Autres_details);
+            //cmd.Parameters.AddWithValue("@author", cat.Author);
             cmd.ExecuteNonQuery();
             con.Close();
         }

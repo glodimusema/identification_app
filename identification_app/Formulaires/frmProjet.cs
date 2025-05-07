@@ -110,5 +110,19 @@ namespace identification_app.Formulaires
         {
             liste_projet.DataSource = clsGlossaires.Getinstance().searchData("tprojet", "nom_projet", txtRecherche.Text);
         }
+
+        private void liste_projet_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = liste_projet.Rows[e.RowIndex];
+                // Supposons que tu as trois TextBox : txtId, txtUsername, txtNiveau
+                txtId.Text = row.Cells["id"].Value.ToString();
+                txtNom.Text = row.Cells["nom_projet"].Value.ToString();
+                txtDescription.Text = row.Cells["description_projet"].Value.ToString();
+                txtDateDebut.Text = row.Cells["date_debut"].Value.ToString();
+                txtDateFin.Text = row.Cells["date_fin"].Value.ToString();
+            }
+        }
     }
 }

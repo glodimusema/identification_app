@@ -114,5 +114,24 @@ namespace identification_app.Formulaires
         {
             liste_personne.DataSource = clsGlossaires.Getinstance().searchData("tpersonne","noms",txtRecherche.Text);
         }
+
+        private void liste_personne_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Vérifie que la ligne cliquée est valide
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = liste_personne.Rows[e.RowIndex];
+                // Supposons que tu as trois TextBox : txtId, txtUsername, txtNiveau
+                txtId.Text = row.Cells["id"].Value.ToString();
+                txtNom.Text = row.Cells["noms"].Value.ToString();
+                txtAdresse.Text = row.Cells["adresse"].Value.ToString();
+                txtContact.Text = row.Cells["contact"].Value.ToString();
+                txtEtatCivil.Text = row.Cells["etat_civil"].Value.ToString();
+                txtDateNaissance.Text = row.Cells["date_naissance"].Value.ToString();
+                txtNiveauEtude.Text = row.Cells["niveau_etude"].Value.ToString();
+                txtDomaineEtude.Text = row.Cells["domaine_etude"].Value.ToString();
+            }
+
+        }
     }
 }

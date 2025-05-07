@@ -56,6 +56,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate1.Size = new System.Drawing.Size(245, 30);
             this.txtDate1.TabIndex = 0;
+            this.txtDate1.Visible = false;
             // 
             // txtDate2
             // 
@@ -70,6 +71,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate2.Size = new System.Drawing.Size(245, 30);
             this.txtDate2.TabIndex = 1;
+            this.txtDate2.Visible = false;
             // 
             // label1
             // 
@@ -90,6 +92,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Liste des Enqueteurs";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -100,6 +103,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Liste des Enqueteurs/Projet";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -110,6 +114,7 @@
             this.label2.Size = new System.Drawing.Size(291, 25);
             this.label2.TabIndex = 5;
             this.label2.Text = "Selectionnez l\'Interval des dates";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -139,6 +144,7 @@
             this.button3.TabIndex = 76;
             this.button3.Text = "Liste des Enqueteurs/Projet";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // frmRapport
             // 
@@ -155,7 +161,8 @@
             this.Controls.Add(this.txtDate2);
             this.Controls.Add(this.txtDate1);
             this.Name = "frmRapport";
-            this.Text = "frmRapport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "LES RAPPORTS";
             this.Load += new System.EventHandler(this.frmRapport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtDate1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate1.Properties)).EndInit();
