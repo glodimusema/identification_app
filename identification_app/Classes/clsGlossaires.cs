@@ -106,14 +106,14 @@ namespace identification_app.Classes
             return IdData;
         }
 
-        public DataSet get_Report_All(string nomTable)
+        public DataSet get_Report_All(string nomTable,string ordre)
         {
             DataSet dst;
             try
             {
                 InnitialiseConnexion();
                 if (!con.State.ToString().ToLower().Equals("open")) con.Open();
-                cmd = new SqlCommand("SELECT * FROM " + nomTable + "", con);
+                cmd = new SqlCommand("SELECT * FROM " + nomTable + " order by "+ordre+"", con);
                 dt = new SqlDataAdapter(cmd);
                 dst = new DataSet();
                 dt.Fill(dst, nomTable);
@@ -179,14 +179,14 @@ namespace identification_app.Classes
             }
             return dst;
         }
-        public DataSet get_Report_One(string nomTable, string nomchamp, string val1)
+        public DataSet get_Report_One(string nomTable, string nomchamp, string val1,string ordre)
         {
             DataSet dst;
             try
             {
                 InnitialiseConnexion();
                 if (!con.State.ToString().ToLower().Equals("open")) con.Open();
-                cmd = new SqlCommand("SELECT * FROM " + nomTable + " WHERE " + nomchamp + " = @val1 ", con);
+                cmd = new SqlCommand("SELECT * FROM " + nomTable + " WHERE " + nomchamp + " = @val1 order by "+ordre+"", con);
                 setParameter(cmd, "@val1", DbType.String, 30, val1);
                 dt = new SqlDataAdapter(cmd);
                 dst = new DataSet();
@@ -203,6 +203,7 @@ namespace identification_app.Classes
             return dst;
         }
 
+        
 
         public DataSet get_Report_Two(string nomTable, string nomchamp, string val1, string nomchamp2, string val2)
         {

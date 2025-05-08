@@ -30,7 +30,7 @@ namespace identification_app.Formulaires
             try
             {
                 rptListeEqueteur rpt = new rptListeEqueteur();
-                rpt.DataSource = clsGlossaires.Getinstance().get_Report_All("tpersonne");
+                rpt.DataSource = clsGlossaires.Getinstance().get_Report_All("tpersonne","noms");
                 using (ReportPrintTool printTool = new ReportPrintTool(rpt))
                 {
                     printTool.ShowPreviewDialog();
@@ -45,7 +45,7 @@ namespace identification_app.Formulaires
             try
             {
                 rptAffectaionProjet rpt = new rptAffectaionProjet();
-                rpt.DataSource = clsGlossaires.Getinstance().get_Report_All("vAffectation");
+                rpt.DataSource = clsGlossaires.Getinstance().get_Report_All("vAffectation","noms");
                 using (ReportPrintTool printTool = new ReportPrintTool(rpt))
                 {
                     printTool.ShowPreviewDialog();
@@ -60,7 +60,7 @@ namespace identification_app.Formulaires
             try
             {
                 rptAffectaionProjet rpt = new rptAffectaionProjet();
-                rpt.DataSource = clsGlossaires.Getinstance().get_Report_One("vAffectation", "refProjet", clsGlossaires.Getinstance().getcode_Combo("tprojet", "id", "nom_projet", txtProjet.Text));
+                rpt.DataSource = clsGlossaires.Getinstance().get_Report_One("vAffectation", "refProjet", clsGlossaires.Getinstance().getcode_Combo("tprojet", "id", "nom_projet", txtProjet.Text),"noms");
                 using (ReportPrintTool printTool = new ReportPrintTool(rpt))
                 {
                     printTool.ShowPreviewDialog();
